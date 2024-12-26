@@ -46,10 +46,10 @@ const Input = ({
             <TextField
               name="email"
               label="Email Address"
-              value={loginData.email}
+              value={loginData?.email || ""} // Fallback to empty string
               onChange={handleInputFieldChange}
-              error={!!errors.email} // Set error if there's a message in errors.email
-              helperText={errors.email} // Show the error message
+              error={!!errors?.email}
+              helperText={errors?.email || ""}
               fullWidth
               variant="outlined"
             />

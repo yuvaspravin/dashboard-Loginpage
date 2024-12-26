@@ -118,5 +118,29 @@
     "role": "Intern",
     "status": "Active",
     "joiningDate": "2023-10-05"
+  },
+  {
+    "id": 11,
+    "name": "Sophia ",
+    "email": "sophia@example.com",
+    "password": "sophiapwd",
+    "age": 24,
+    "location": "Buenos Aires, Argentina",
+    "phone": "999-111-2222",
+    "role": "Intern",
+    "status": "Active",
+    "joiningDate": "2023-10-05"
+  },
+  {
+    "id": 12,
+    "name": " Martinez",
+    "email": "martinez@example.com",
+    "password": "Martinez",
+    "age": 24,
+    "location": "Buenos Aires, Argentina",
+    "phone": "999-111-3322",
+    "role": "Intern",
+    "status": "Active",
+    "joiningDate": "2023-10-05"
   }
 ]

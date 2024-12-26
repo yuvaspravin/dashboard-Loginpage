@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Box, CssBaseline, Grid, Paper } from "@mui/material";
 import loginImage from "../assets/loginPage.png";
@@ -6,27 +6,28 @@ import loginImage from "../assets/loginPage.png";
 import Input from "../components/Input";
 import ButtonPage from "../components/ButtonPage";
 import { useDispatch, useSelector } from "react-redux";
-import { setErrors, setLoading, setLoginData } from "../redux/action/action";
+import {
+  setErrors,
+  setLoading,
+  setLoginData,
+  setUserData,
+} from "../redux/action/action";
 import { useNavigate } from "react-router-dom";
+
+import users from "../user.json";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loginData = useSelector((state) => state.loginData);
-  const errors = useSelector((state) => state.errors);
+  const loginData = useSelector((state) => state?.login?.loginData);
+  const errors = useSelector((state) => state?.login?.errors);
 
   console.log(loginData, "loginData");
+
   const userState = useSelector((state) => state.user.users);
-  const userDetail = [
-    {
-      userEmail: "userone@gmail.com",
-      password: "password1",
-    },
-    {
-      userEmail: "userone@gmail.com",
-      password: "password1",
-    },
-  ];
+
+  console.log(userState, "userState");
+
   // onchange
   const handleInputFieldChange = (e) => {
     const { name, value } = e.target;
@@ -80,15 +81,16 @@ const LoginPage = () => {
       // Simulate login request with user details
       const user = userState.find(
         (user) =>
-          user.userEmail === loginData.email &&
-          user.password === loginData.password
+          user.email === loginData.email && user.password === loginData.password
       );
-      const userEmail = userDetail.find(
-        (user) => user.userEmail === loginData.email
+      const userEmail = userState.find(
+        (user) => user.email === loginData.email
       );
-      const userPassword = userDetail.find(
+
+      const userPassword = userState.filter(
         (user) => user.password === loginData.password
       );
+      console.log(userState, "userEmail");
 
       if (user) {
         // Store user data in localStorage and navigate to dashboard

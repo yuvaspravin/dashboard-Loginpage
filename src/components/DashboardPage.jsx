@@ -74,11 +74,7 @@ const DashboardPage = ({ fullWidth = true }) => {
   const dispatch = useDispatch();
 
   // Load user.json data into Redux store
-  useEffect(() => {
-    if (users) {
-      dispatch(setUserData(users)); // Use the action creator function
-    }
-  }, [dispatch]);
+
   const [viewType, setViewType] = React.useState("table");
   const [currentPage, setCurrentPage] = React.useState(1);
   const [usersPerPage] = React.useState(6);
@@ -127,7 +123,14 @@ const DashboardPage = ({ fullWidth = true }) => {
         User List
       </Typography>
 
-      <Paper sx={{ margin: 5 }}>
+      <Paper
+        sx={{
+          margin: 5,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <ToggleButtonGroup
             value={viewType}
@@ -188,7 +191,7 @@ const DashboardPage = ({ fullWidth = true }) => {
             >
               <Grid container spacing={2}>
                 {currentUsers.map((user) => (
-                  <Grid item xs={12} sm={6} md={4} key={user.id}>
+                  <Grid item md={4} key={user.id}>
                     <Card sx={{ width: "100%" }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
