@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardContent,
   Divider,
@@ -14,9 +15,10 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import users from "../user.json";
-import { TableView, GridView } from "@mui/icons-material";
-import { SET_USERS, setUserData } from "../redux/action/action";
+import { TableView, GridView, Logout } from "@mui/icons-material";
+import { SET_USERS, setLoginData, setUserData } from "../redux/action/action";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const columns = [
   { field: "serialNo", headerName: "Sl. No", width: 90 },
@@ -72,7 +74,7 @@ const columns = [
 
 const DashboardPage = ({ fullWidth = true }) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   // Load user.json data into Redux store
 
   const [viewType, setViewType] = React.useState("table");
@@ -103,6 +105,11 @@ const DashboardPage = ({ fullWidth = true }) => {
   const currentUsers = userState.slice(indexOfFirstUser, indexOfLastUser);
 
   const totalPages = Math.ceil(users.length / usersPerPage);
+
+  const handleLogout = () => {
+    dispatch(setLoginData({}));
+    navigate("/");
+  };
   return (
     <div
       style={{
@@ -122,6 +129,14 @@ const DashboardPage = ({ fullWidth = true }) => {
       >
         User List
       </Typography>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", width: "92%" }}>
+        <Button
+          variant="outlined"
+          startIcon={<Logout onClick={handleLogout} />}
+        >
+          Logout
+        </Button>
+      </Box>
 
       <Paper
         sx={{
